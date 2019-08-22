@@ -5,7 +5,7 @@ com:
   zea:
     ovidio:
       parametro:
-        endPointProductos: http://${hostcliente}:${portcliente}
+        endPointProductos: http://wsproductos:8081
 
 spring:
   jpa:

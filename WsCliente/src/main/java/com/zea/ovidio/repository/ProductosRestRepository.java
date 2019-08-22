@@ -63,6 +63,8 @@ public class ProductosRestRepository {
 
 		url.append(wsProperties.getEndPointProductos()).append("/").append("productos/").append(idCliente);
 
+		System.out.println(url.toString());
+
 		uriBuilder = UriComponentsBuilder.fromHttpUrl(url.toString());
 
 		response = ClientBuilder.newBuilder().sslContext(sslContext).register(JacksonJsonProvider.class).build()

@@ -9,6 +9,8 @@ RUN cd /app && mvn -e -B package -Dmaven.test.skip=true
 #### EJECUCION DEL JAR ####
 FROM openjdk:8-jdk-alpine
 
+RUN apk --no-cache add curl
+
 ENV DOCKERIZE_VERSION v0.6.1
 RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
@@ -21,8 +23,7 @@ ENV host="postgres11_tienda"
 ENV database="tienda"
 ENV username="postgres"
 ENV password="postgres123"
-ENV hostcliente = "wsproductos"
-ENV portcliente = "8081"
+ENV urlcliente = "http://wsproductos:8081"
 
 ENTRYPOINT exec java -jar /app.jar
 EXPOSE 8082
