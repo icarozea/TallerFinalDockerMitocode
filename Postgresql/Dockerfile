@@ -2,8 +2,7 @@ FROM postgres:11
 LABEL maintainer="ovidio.zea@gmail.com"
 
 ENV POSTGRES_PASSWORD=postgres123
-ENV POSTGRES_DB=tienda
+ENV POSTGRES_USER=postgres
 
 COPY ./scripts/ /docker-entrypoint-initdb.d/
-#RUN psql -h localhost -U postgres -a -f /docker-entrypoint-initdb.d/scripts/DDL1.sql
-CMD ["psql -h localhost -U postgres -a -f /docker-entrypoint-initdb.d/scripts/DDL1.sql"]
+RUN chmod 744 /docker-entrypoint-initdb.d/DDL1.sql
