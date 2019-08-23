@@ -3,8 +3,8 @@ version: '3.4'
 services:
 
   postgres11:
-    build: ./Postgresql/
-    image: ozea/postgres11:latest
+    #build: ./Postgresql/
+    image: icarozea/postgres11_tienda:latest
     ports:
       - "5432:5432"
     environment:
@@ -14,8 +14,8 @@ services:
       - demo
 
   wsproductos:
-    build: ./WsProductos/
-    image: ozea/wsproductos:latest
+    #build: ./WsProductos/
+    image: icarozea/wsproductos:latest
     ports:
       - "8081:8081"
     environment: 
@@ -33,8 +33,8 @@ services:
       - demo
 
   wscliente:
-    build: ./WsCliente/
-    image: ozea/wscliente:latest
+    #build: ./WsCliente/
+    image: icarozea/wscliente:latest
     ports:
       - "8082:8082"
     environment: 
