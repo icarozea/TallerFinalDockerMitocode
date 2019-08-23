@@ -1,0 +1,56 @@
+version: '3.4'
+
+services:
+
+  postgres11:
+    build: ./Postgresql/
+    image: ozea/postgres11:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres123
+      - POSTGRES_USER=postgres
+    networks:
+      - demo
+
+  wsproductos:
+    build: ./WsProductos/
+    image: ozea/wsproductos:latest
+    ports:
+      - "8081:8081"
+    environment: 
+      - host=postgres11
+      - database=tienda
+      - username=postgres
+      - password=postgres123
+    depends_on:
+      - postgres11
+    restart: on-failure
+    #Sobreescribiendo el entrypoint del dockerfile
+    entrypoint: dockerize -wait tcp://postgres11:5432 -timeout 10m java -jar /app.jar
+    #entrypoint: java -jar /app.jar
+    networks:
+      - demo
+
+  wscliente:
+    build: ./WsCliente/
+    image: ozea/wscliente:latest
+    ports:
+      - "8082:8082"
+    environment: 
+      - host=postgres11
+      - database=tienda
+      - username=postgres
+      - password=postgres123
+      - urlcliente=http://wsproductos:8081
+    depends_on: 
+      - postgres11
+      - wsproductos
+    restart: on-failure
+    entrypoint: dockerize -wait tcp://postgres11:5432 -wait tcp://wsproductos:8081 -timeout 10m java -jar /app.jar
+    #entrypoint: java -jar /app.jar
+    networks:
+      - demo
+
+networks:
+  demo: 
