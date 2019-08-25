@@ -12,6 +12,16 @@ services:
       - POSTGRES_USER=postgres
     networks:
       - demo
+    deploy:
+     replicas: 1
+     resources:
+       limits:
+         cpus: "0.4"
+         memory: 512M
+     restart_policy:
+       condition: on-failure
+     placement:
+       constraints: [node.role == worker]
 
   wsproductos:
     #build: ./WsProductos/
@@ -31,6 +41,16 @@ services:
     #entrypoint: java -jar /app.jar
     networks:
       - demo
+    deploy:
+     replicas: 1
+     resources:
+       limits:
+         cpus: "0.3"
+         memory: 512M
+     restart_policy:
+       condition: on-failure
+     placement:
+       constraints: [node.role == worker]
 
   wscliente:
     #build: ./WsCliente/
@@ -51,6 +71,16 @@ services:
     #entrypoint: java -jar /app.jar
     networks:
       - demo
+    deploy:
+     replicas: 1
+     resources:
+       limits:
+         cpus: "0.3"
+         memory: 512M
+     restart_policy:
+       condition: on-failure
+     placement:
+       constraints: [node.role == worker]
 
 networks:
   demo: 
