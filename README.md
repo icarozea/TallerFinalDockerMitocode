@@ -3,9 +3,9 @@ Taller final curso docker mitocode Tienda
 
 Se crearon 3 servicios:
 
-- postgres11: es una bd de datos postgres v11 llamada tienda que tiene 3 tablas producto, cliente y compras.
-- wsproductos: Es un servicio spring boot que retorna la información de productos y compras que ha hecho un cliente.
-- wscliente: Es un servicio spring boot que retorna la información de clientes y se conecta a wsproductos para consumir el servicio de compras que ha realizado un cliente.
+- **postgres11**: es una bd de datos postgres v11 llamada tienda que tiene 3 tablas producto, cliente y compras.
+- **wsproductos**: Es un servicio spring boot que retorna la información de productos y compras que ha hecho un cliente.
+- **wscliente**: Es un servicio spring boot que retorna la información de clientes y se conecta a wsproductos para consumir el servicio de compras que ha realizado un cliente.
 
 ## Comandos
 - docker stack deploy -c docker-compose.yml tallerfinal
